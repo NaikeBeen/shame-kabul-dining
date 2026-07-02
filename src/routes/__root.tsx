@@ -95,19 +95,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:site_name", content: SITE.name },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: "Shaam Kabul · Authentic Afghan Restaurant" },
+      { property: "og:title", content: "Shaam Kabul · Authentic Afghan Restaurant in Kabul" },
       {
         property: "og:description",
         content:
           "Authentic Afghan cuisine — Kabuli Pulao, charcoal kebabs, mantu — in a warm, elegant setting in Kabul.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Shaam Kabul · Authentic Afghan Restaurant" },
+      { name: "twitter:title", content: "Shaam Kabul · Authentic Afghan Restaurant in Kabul" },
       {
         name: "twitter:description",
         content: "Authentic Afghan cuisine in the heart of Kabul.",
       },
       { name: "theme-color", content: "#C65D3A" },
+      { name: "description", content: "Shame Kabul Elegance is a premium restaurant website showcasing a luxurious, modern, and elegant dining experience." },
+      { property: "og:description", content: "Shame Kabul Elegance is a premium restaurant website showcasing a luxurious, modern, and elegant dining experience." },
+      { name: "twitter:description", content: "Shame Kabul Elegance is a premium restaurant website showcasing a luxurious, modern, and elegant dining experience." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e8053c3b-799e-4fa1-9f8e-0aac11100216/id-preview-a18a93c7--2d1c7bff-9815-4639-84a5-b1c12bddafb7.lovable.app-1782985274972.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e8053c3b-799e-4fa1-9f8e-0aac11100216/id-preview-a18a93c7--2d1c7bff-9815-4639-84a5-b1c12bddafb7.lovable.app-1782985274972.png" },
     ],
     links: [
       {
