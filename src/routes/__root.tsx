@@ -11,6 +11,11 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { I18nProvider } from "../lib/i18n";
+import { Header } from "../components/site/Header";
+import { Footer } from "../components/site/Footer";
+import { StickyMobileCTA } from "../components/site/StickyMobileCTA";
+import { SITE } from "../lib/site-config";
 
 function NotFoundComponent() {
   return (
@@ -77,14 +82,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Shaam Kabul · Authentic Afghan Restaurant in Kabul" },
+      {
+        name: "description",
+        content:
+          "Shaam Kabul serves authentic Afghan cuisine — Kabuli Pulao, charcoal kebabs, mantu and more — in a warm, elegant setting in the heart of Kabul.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Shaam Kabul, Shame Kabul, Afghan restaurant Kabul, Kabuli Pulao, kebab, mantu, Afghan food, reservation Kabul",
+      },
+      { property: "og:site_name", content: SITE.name },
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "Shaam Kabul · Authentic Afghan Restaurant" },
+      {
+        property: "og:description",
+        content:
+          "Authentic Afghan cuisine — Kabuli Pulao, charcoal kebabs, mantu — in a warm, elegant setting in Kabul.",
+      },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Shaam Kabul · Authentic Afghan Restaurant" },
+      {
+        name: "twitter:description",
+        content: "Authentic Afghan cuisine in the heart of Kabul.",
+      },
+      { name: "theme-color", content: "#C65D3A" },
     ],
     links: [
       {
@@ -92,6 +115,55 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Vazirmatn:wght@400;500;600;700;800&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Restaurant",
+          name: SITE.name,
+          servesCuisine: ["Afghan", "Middle Eastern"],
+          priceRange: "$$",
+          telephone: SITE.phones,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Kabul",
+            addressCountry: "AF",
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
+              ],
+              opens: "11:00",
+              closes: "23:00",
+            },
+          ],
+          sameAs: [SITE.facebook].filter(Boolean),
+          url: `https://${SITE.domain}`,
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -102,7 +174,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fa" dir="rtl">
       <head>
         <HeadContent />
       </head>
@@ -119,8 +191,20 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <I18nProvider>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main" className="min-h-[60vh]">
+          <Outlet />
+        </main>
+        <Footer />
+        <StickyMobileCTA />
+      </I18nProvider>
     </QueryClientProvider>
   );
 }
